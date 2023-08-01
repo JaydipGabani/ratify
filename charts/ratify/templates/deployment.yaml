@@ -25,6 +25,7 @@ spec:
         checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
         {{- if and .Values.provider.cache.enabled  (eq .Values.provider.cache.type "dapr") }}
         dapr.io/enabled: "true"
+        dapr.io/sidecar-seccomp-profile-type: "RuntimeDefault"
         dapr.io/app-id: {{ include "ratify.fullname" . }}
         {{- if eq (lower .Values.logLevel) "debug" }}
         dapr.io/enable-api-logging: "true"
